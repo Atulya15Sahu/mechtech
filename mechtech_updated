@@ -1,0 +1,95 @@
+name = input("\033[0mWhat is your name? ")
+print(f"\nHello {name}, welcome to your Indian Finance Calculator 2026")
+
+monthly_income = float(input("What is your monthly income? "))
+annual_income = monthly_income * 12
+
+taxable_income = max(0, annual_income - 75000)
+annual_tax = 0
+
+if taxable_income <= 400000:
+    annual_tax = 0
+elif taxable_income <= 800000:
+    annual_tax = (taxable_income - 400000) * 0.05
+elif taxable_income <= 1200000:
+    annual_tax = 20000 + (taxable_income - 800000) * 0.10
+elif taxable_income <= 1600000:
+    annual_tax = 60000 + (taxable_income - 1200000) * 0.15
+elif taxable_income <= 2000000:
+    annual_tax = 120000 + (taxable_income - 1600000) * 0.20
+elif taxable_income <= 2400000:
+    annual_tax = 200000 + (taxable_income - 2000000) * 0.25
+else:
+    annual_tax = 300000 + (taxable_income - 2400000) * 0.30
+
+if taxable_income <= 1200000:
+    annual_tax = 0
+
+total_annual_tax = annual_tax * 1.04
+monthly_tax = total_annual_tax / 12
+
+groceries = float(input("How much do you spend on groceries? "))
+rent = float(input("How much do you spend on rent? "))
+utilities = float(input("How much do you spend on utilities? "))
+transportation = float(input("How much do you spend on transportation? "))
+entertainment = float(input("How much do you spend on entertainment? "))
+medical = float(input("How much do you spend on medical expenses? "))
+other = float(input("How much do you spend on other expenses? "))
+shopping = float(input("How much do you spend on shopping? "))
+
+total_expenses = (
+    groceries + rent + utilities + transportation + 
+    entertainment + medical + other + shopping + monthly_tax
+)
+savings = monthly_income - total_expenses
+
+print("-" * 60)
+print(f"\033[91mMonthly Income: ₹{monthly_income}")
+print(f"\033[92mEstimated Monthly Tax: ₹{monthly_tax}")
+print(f"\033[93mTotal Monthly Expenses: ₹{total_expenses}")
+print(f"\033[96mMonthly Savings: ₹{savings}")
+print("\033[0m-" * 60)
+
+
+if savings > 0:
+    print("How much percentage of your savings do you want to invest?")
+    print("Options: 10% ,15% ,20% , 25% ,30% ,35% , 40% ,45% , 50% ,55% ,60% ,65% ,70% ,75% ,80% ,85% ,90% ,95%")
+    choice = input("Your choice (eg: 10) ")
+
+  
+    percent = 0
+    if "10" in choice: percent = 0.10
+    elif "15" in choice: percent = 0.15
+    elif "20" in choice: percent = 0.20
+    elif "25" in choice: percent = 0.25
+    elif "30" in choice: percent = 0.30
+    elif "35" in choice: percent = 0.35
+    elif "40" in choice: percent = 0.40
+    elif "45" in choice: percent = 0.45
+    elif "50" in choice: percent = 0.50
+    elif "55" in choice: percent = 0.55
+    elif "60" in choice: percent = 0.60
+    elif "65" in choice: percent = 0.65
+    elif "70" in choice: percent = 0.70
+    elif "75" in choice: percent = 0.75
+    elif "80" in choice: percent = 0.80
+    elif "85" in choice: percent = 0.85
+    elif "90" in choice: percent = 0.90
+    elif "95" in choice: percent = 0.95
+    
+
+    if percent > 0:
+        invest = savings * percent
+        print(f"\033[91mMonthly Income: ₹{monthly_income}")
+        print(f"\033[92mEstimated Monthly Tax: ₹{monthly_tax}")
+        print(f"\033[93mTotal Monthly Expenses: ₹{total_expenses}")
+        print(f"\033[96mMonthly Savings: ₹{savings}")
+        print(f"\033[94m You will invest: ₹{round(invest, 2)}")
+        print(f"\033[95mRemaining balance: ₹{savings - invest}")
+
+    else:
+        print(f"No investment made. Balance: ₹{savings}")
+else:
+    print("Alert: Your expenses exceed your income. No savings available for investment.your in debt")
+    print("Consider reviewing your expenses and finding ways to reduce them.")    
+    
