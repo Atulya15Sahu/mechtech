@@ -1,0 +1,72 @@
+from pyscript import document
+
+def calculate_finance(event):
+    
+    name = document.querySelector("#name").value
+    if not name: name = "Guest"
+    
+    try:
+        monthly_income = float(document.querySelector("#monthly_income").value)
+    except:
+        monthly_income = 0
+
+    annual_income = monthly_income * 12
+   
+    taxable_income = max(0, annual_income - 75000)
+    
+    annual_tax = 0
+ 
+    if taxable_income > 1200000:
+        if taxable_income <= 400000:
+            annual_tax = 0
+        elif taxable_income <= 800000:
+            annual_tax = (taxable_income - 400000) * 0.05
+        elif taxable_income <= 1200000:
+            annual_tax = 20000 + (taxable_income - 800000) * 0.10
+        elif taxable_income <= 1600000:
+            annual_tax = 60000 + (taxable_income - 1200000) * 0.15
+        elif taxable_income <= 2000000:
+            annual_tax = 120000 + (taxable_income - 1600000) * 0.20
+        elif taxable_income <= 2400000:
+            annual_tax = 200000 + (taxable_income - 2000000) * 0.25
+        else:
+            annual_tax = 300000 + (taxable_income - 2400000) * 0.30
+
+    total_annual_tax = annual_tax * 1.04  
+    monthly_tax = total_annual_tax / 12
+
+    expense_fields = ["groceries", "rent", "utilities", "transport", "entertainment", "medical", "shopping", "other"]
+    total_expense_sum = 0
+    for field in expense_fields:
+        val = document.querySelector(f"#{field}").value
+        total_expense_sum += float(val) if val else 0
+    
+    grand_total_expenses = total_expense_sum + monthly_tax
+    savings = monthly_income - grand_total_expenses
+
+    
+    invest_pct_str = document.querySelector("#invest_percent").value
+    invest_pct = float(invest_pct_str) / 100 if invest_pct_str else 0
+    invest_amount = savings * invest_pct if savings > 0 else 0
+
+    output_div = document.querySelector("#output")
+    output_div.style.display = "block"
+    
+    report = f" **Financial Report for {name}**\n"
+    report += "—" * 20 + "\n"
+    report += f"Monthly Gross: ₹{monthly_income:,.2f}\n"
+    report += f"Estimated Tax: ₹{monthly_tax:,.2f}\n"
+    report += f"Total Spending: ₹{grand_total_expenses:,.2f}\n"
+
+    if savings > 0:
+        output_div.className = "success"
+        report += f"Actual Savings: ₹{savings:,.2f}\n"
+        if invest_pct > 0:
+            report += f"Target Investment: ₹{invest_amount:,.2f} ({invest_pct_str}%)\n"
+            report += f"Final Liquidity: ₹{savings - invest_amount:,.2f}"
+    else:
+        output_div.className = "danger"
+        report += f" ALERT: Deficit of ₹{abs(savings):,.2f}\n"
+        report += "Warning: Your expenses exceed your income."
+
+    output_div.innerText = report
