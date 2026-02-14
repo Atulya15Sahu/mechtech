@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Finance Calculator 2026</title>
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2><span class="flag-orange">Indian</span> Finance <span class="flag-green">Calculator</span></h2>
+        <p class="subtitle">Tax Regime 2025-26 (v.2)</p>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="name" placeholder="E.g. Rahul Sharma">
+            </div>
+            <div class="form-group">
+                <label>Monthly Income (₹)</label>
+                <input type="number" id="monthly_income" value="150000">
+            </div>
+        </div>
+
+        <div class="expense-section">
+            <h4>Monthly Expenses (₹)</h4>
+            <div class="expense-grid">
+                <input type="number" id="groceries" placeholder="Groceries">
+                <input type="number" id="rent" placeholder="Rent/EMI">
+                <input type="number" id="utilities" placeholder="Utilities">
+                <input type="number" id="transport" placeholder="Transport">
+                <input type="number" id="entertainment" placeholder="Entertainment">
+                <input type="number" id="medical" placeholder="Medical">
+                <input type="number" id="shopping" placeholder="Shopping">
+                <input type="number" id="other" placeholder="Other Expenses">
+            </div>
+        </div>
+
+        <div class="invest-group">
+            <label>Investment Target (%)</label>
+            <input type="number" id="invest_percent" placeholder="E.g. 20">
+        </div>
+
+        <button id="calc-btn" py-click="calculate_finance">Generate Report</button>
+
+        <div id="output"></div>
+
+        <div class="contact-footer">
+            Queries? Contact: <span class="phone">+91 9686628798</span>or send a mail to <span
+                class="phone">atulya15sahu@gmail.com</span>
+        </div>
+    </div>
+
+    <script type="py" src="calculator.py" config='{"packages":[]}'></script>
+
+</body>
+
+</html>
